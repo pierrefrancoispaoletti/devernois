@@ -1,0 +1,20 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+code {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.App-header {
+  position: relative;
+  background:#57812F ;
+  color: white;
+  width: 80%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 22px auto;
+  border-radius: 30px;
+}

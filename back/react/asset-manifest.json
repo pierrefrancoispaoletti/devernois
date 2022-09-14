@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/css/main.04b992fc.css",
+    "main.js": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/js/main.fd0b9968.js",
+    "static/media/logo.PNG": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/media/logo.6135d8ff6cd7e28214eb.PNG",
+    "index.html": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/index.html",
+    "main.04b992fc.css.map": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/css/main.04b992fc.css.map",
+    "main.fd0b9968.js.map": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/js/main.fd0b9968.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04b992fc.css",
+    "static/js/main.fd0b9968.js"
+  ]
+}
