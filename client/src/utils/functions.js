@@ -1,3 +1,4 @@
+import moment from "moment";
 export const findPartsOfForm = (labelName, indexes) => {
   return indexes.filter((element) => {
     if (element.LABEL.includes(labelName)) {
@@ -25,4 +26,27 @@ export const getDefaultProps = (props) => {
       return option?.label ?? "";
     },
   };
+};
+
+export const getTimeDiff = (startTime, endTime) => {
+  let start = moment(startTime, "HH:mm");
+  let end = moment(endTime, "HH:mm");
+
+  const minute = 0.0166667;
+
+  const duration = moment.duration(end.diff(start));
+  const hours = parseInt(duration.asHours());
+
+  return Number(hours + duration.minutes() * minute).toFixed(2);
+};
+
+export const diffTimeOfTheDay = (ma, md, ama, amd) => {
+  const computeDiffTime =
+    Number(getTimeDiff(ma, md)) + Number(getTimeDiff(ama, amd));
+
+  if (!isNaN(computeDiffTime)) {
+    return computeDiffTime;
+  } else {
+    return 0;
+  }
 };

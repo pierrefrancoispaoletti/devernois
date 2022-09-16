@@ -9,9 +9,11 @@ let edit = false;
 function App() {
   const [state, setState] = useState({});
 
+
   var userFromServer = window.user ?? user;
   var indexCollectionFromServer = window.indexCollection ?? indexCollection;
   var collId = window.collId;
+  var type = window.type || "CDI";
   // var Res_Id = window.Res_id;
   // var Coll_Id = window.Coll_Id;
   // var datasFromBD = window.datasFromBd;
@@ -62,6 +64,12 @@ function App() {
         16
       );
 
+      initialState["Demande de contrat"]["Motif absence"].hidden =
+        type === "CDI";
+      initialState["Demande de contrat"]["Nom personne absente"].hidden =
+        type === "CDI";
+      initialState["Demande de contrat"]["Surcroit"].hidden = type === "CDI";
+
       setState({ ...initialState });
     }
   }, []);
@@ -78,7 +86,11 @@ function App() {
         <img width="40%" src={logo} alt="logo Credit agricole developpement" />
       </div> */}
       <header className="App-header">
-        <h1 className="App-title">Demande de contrat</h1>
+        <h1 className="App-title">
+          {type === "CDD"
+            ? "Demande de contrat CDD/Avenant complément d’heure"
+            : "Demande de contrat CDI"}
+        </h1>
         <div className="App-decorator"></div>
       </header>
       {Object.keys(state).length && (
@@ -88,6 +100,7 @@ function App() {
           state={state}
           setState={setState}
           collId={collId}
+          type={type}
         />
       )}
     </div>
