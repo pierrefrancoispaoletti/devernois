@@ -15,6 +15,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   convertObjectToArrayOfObject,
   diffTimeOfTheDay,
+  getValueFromId,
 } from "../../utils/functions";
 import { initialStateConfigObject } from "../../config/configInitialState";
 
@@ -25,7 +26,15 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Form = ({ labels, datas, state, setState, collId }) => {
+const Form = ({
+  labels,
+  datas,
+  state,
+  setState,
+  collId,
+  typeContrat,
+  formDatas,
+}) => {
   const [message, setMessage] = useState({});
   ////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////// Envoi des données //////////////////////////////////
@@ -44,7 +53,7 @@ const Form = ({ labels, datas, state, setState, collId }) => {
   const axiosCall = async () => {
     const response = await axios({
       method: "POST",
-      url: `traitement.php/?Coll_Id=${collId}`,
+      url: `traitement.php/?Coll_Id=${collId}&contrat=${typeContrat}`,
       data: state,
     });
 
@@ -110,7 +119,7 @@ const Form = ({ labels, datas, state, setState, collId }) => {
   );
 
   const handleChangeSelectInput = useCallback(
-    (e, label, newValue, ligne) => {
+    (e, label, newValue, valeursParentes) => {
       const { id } = e.target;
       const shortLabel = id.split("__")[1];
       setState({
@@ -120,6 +129,33 @@ const Form = ({ labels, datas, state, setState, collId }) => {
           [shortLabel]: { ...state[label][shortLabel], value: newValue },
         },
       });
+
+      if (shortLabel === "Boutique") {
+        let foundObject = Object.values(valeursParentes).find((obj) =>
+          Object.values(obj["Membres_Groupe"]).includes(newValue.label)
+        );
+
+        let foundResponsableKey = Object.keys(valeursParentes).find(
+          (key) => valeursParentes[key] === foundObject
+        );
+
+        let foundResponsableValue = getValueFromId(
+          foundResponsableKey,
+          formDatas,
+          "Responsable régionale"
+        );
+
+        setState((prevState) => ({
+          ...prevState,
+          "Demande de contrat": {
+            ...prevState["Demande de contrat"],
+            "Responsable régionale": {
+              ...prevState["Demande de contrat"]["Responsable régionale"],
+              value: { id: foundResponsableKey, label: foundResponsableValue },
+            },
+          },
+        }));
+      }
     },
     [setState, state]
   );
@@ -212,6 +248,7 @@ const Form = ({ labels, datas, state, setState, collId }) => {
                 COLUMN: column,
                 TYPE: type,
                 MANDATORY: required,
+                VALEURS_PARENTEES: valeursParentes,
               } = data;
 
               if (required) {
@@ -249,7 +286,12 @@ const Form = ({ labels, datas, state, setState, collId }) => {
                           id={`${column}__${shortLabel}__`}
                           value={state?.[label]?.[shortLabel]?.value ?? ""}
                           onChange={(e, newValue) =>
-                            handleChangeSelectInput(e, label, newValue)
+                            handleChangeSelectInput(
+                              e,
+                              label,
+                              newValue,
+                              valeursParentes
+                            )
                           }
                           disableClearable
                           disabled={

@@ -88,6 +88,12 @@ export const initialStateConfigObject = {
       hidden: false,
       label: "Date début contrat",
     },
+    "Date fin contrat": {
+      type: "date",
+      value: setDayDate(),
+      hidden: false,
+      label: "Date fin contrat",
+    },
     "Heure début": {
       type: "text",
       value: "",
@@ -98,6 +104,13 @@ export const initialStateConfigObject = {
       value: "",
       hidden: false,
       label: "Responsable régionale",
+      disabled: true,
+    },
+    "Intitulé de Poste": {
+      type: "text",
+      value: "",
+      hidden: false,
+      label: "Intitulé de Poste",
     },
     Boutique: {
       type: "text",
@@ -117,15 +130,9 @@ export const initialStateConfigObject = {
       hidden: false,
       label: "Motif absence",
     },
-    "Date fin contrat": {
-      type: "date",
-      value: setDayDate(),
-      hidden: false,
-      label: "Date fin contrat",
-    },
     Surcroit: {
       type: "text",
-      value: setDayDate(),
+      value: "",
       hidden: false,
       label: "Surcroit",
     },

@@ -1,14 +1,17 @@
 import Form from "../Form/Form";
 import { indexCollection, user } from "../datas";
 import { useEffect, useState } from "react";
-import { findPartsOfForm, getlabelList } from "../../utils/functions";
+import {
+  findPartsOfForm,
+  getlabelList,
+  getValueFromId,
+} from "../../utils/functions";
 import { initialStateConfigObject } from "../../config/configInitialState";
 import logo from "./logo.PNG";
 let edit = false;
 
 function App() {
   const [state, setState] = useState({});
-
 
   var userFromServer = window.user ?? user;
   var indexCollectionFromServer = window.indexCollection ?? indexCollection;
@@ -24,23 +27,6 @@ function App() {
   let formDatas = labels.map((labelName) =>
     findPartsOfForm(labelName, indexCollectionFromServer)
   );
-
-  const getValueFromId = (id, formdatas, shortlabel) => {
-    const label = formdatas
-      .map((element) => {
-        return element
-          .map((el) => {
-            if (el.SHORT_LABEL && el.SHORT_LABEL === shortlabel) {
-              return el["VALEURS"][id];
-            }
-          })
-          .filter((el) => el !== undefined);
-      })
-      .filter((el) => el.length && el)
-      .join("")
-      .toString();
-    return label;
-  };
 
   const setInitialValue = (initialState, formdatas, label, shortLabel, id) => {
     initialState[label][shortLabel].value = {
@@ -69,6 +55,8 @@ function App() {
       initialState["Demande de contrat"]["Nom personne absente"].hidden =
         type === "CDI";
       initialState["Demande de contrat"]["Surcroit"].hidden = type === "CDI";
+      initialState["Demande de contrat"]["Date fin contrat"].hidden =
+        type === "CDI";
 
       setState({ ...initialState });
     }
@@ -76,7 +64,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -84,7 +72,7 @@ function App() {
         }}
       >
         <img width="40%" src={logo} alt="logo Credit agricole developpement" />
-      </div> */}
+      </div>
       <header className="App-header">
         <h1 className="App-title">
           {type === "CDD"
@@ -100,7 +88,8 @@ function App() {
           state={state}
           setState={setState}
           collId={collId}
-          type={type}
+          typeContrat={type}
+          formDatas={formDatas}
         />
       )}
     </div>

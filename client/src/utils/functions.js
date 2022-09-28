@@ -50,3 +50,20 @@ export const diffTimeOfTheDay = (ma, md, ama, amd) => {
     return 0;
   }
 };
+
+export const getValueFromId = (id, formdatas, shortlabel) => {
+  const label = formdatas
+    .map((element) => {
+      return element
+        .map((el) => {
+          if (el.SHORT_LABEL && el.SHORT_LABEL === shortlabel) {
+            return el["VALEURS"][id];
+          }
+        })
+        .filter((el) => el !== undefined);
+    })
+    .filter((el) => el.length && el)
+    .join("")
+    .toString();
+  return label;
+};

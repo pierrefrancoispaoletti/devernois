@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/css/main.04b992fc.css",
-    "main.js": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/js/main.fd0b9968.js",
-    "static/media/logo.PNG": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/media/logo.6135d8ff6cd7e28214eb.PNG",
+    "main.js": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/js/main.d1bea8f9.js",
+    "static/media/logo.PNG": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/media/logo.1bb4b9cda0a3c698d8cd.PNG",
     "index.html": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/index.html",
     "main.04b992fc.css.map": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/css/main.04b992fc.css.map",
-    "main.fd0b9968.js.map": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/js/main.fd0b9968.js.map"
+    "main.d1bea8f9.js.map": "/devernois/_ClientSpecific/React_Form_DEVERNOIS/react/static/js/main.d1bea8f9.js.map"
   },
   "entrypoints": [
     "static/css/main.04b992fc.css",
-    "static/js/main.fd0b9968.js"
+    "static/js/main.d1bea8f9.js"
   ]
 }
